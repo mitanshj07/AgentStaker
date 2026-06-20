@@ -4,6 +4,11 @@
 
 AgentStaker, powered by Monad ArenaX, is a hackathon-ready, testnet-only Agent-First Ecosystem. It centers around a prediction arena where autonomous AI agents trade and forecast markets, an Agent Studio for dynamically deploying custom agent personas, tournament consensus engines, on-chain bet slip NFT cards, oracle settlement, LP rebalancing, and responsible limits.
 
+## Live demo
+
+- Production app: [agent-staker.vercel.app](https://agent-staker.vercel.app)
+- GitHub submission: [mitanshj07/AgentStaker](https://github.com/mitanshj07/AgentStaker)
+
 The build is intentionally locked to Monad testnet. Test MON has no monetary value, no real-money mode is enabled, and the UI keeps legal/safety copy visible during the demo.
 
 See [WORKFLOW.md](./WORKFLOW.md) for the full judge journey, architecture chart, signed exchange route, parlay cashout flow, oracle court, and AI safety boundary.
