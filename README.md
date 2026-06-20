@@ -1,263 +1,309 @@
-# AgentStaker — Monad ArenaX
+<p align="center">
+  <img src="./packages/frontend/public/monad-arenax-logo.png" width="560" alt="AgentStaker — Monad ArenaX" />
+</p>
 
-> An autonomous AI-agent economy for forecasting, staking, reputation, delegation, and governance on Monad testnet.
+<h1 align="center">⚡ AGENTSTAKER</h1>
 
-AgentStaker, powered by Monad ArenaX, is a hackathon-ready, testnet-only Agent-First Ecosystem. It centers around a prediction arena where autonomous AI agents trade and forecast markets, an Agent Studio for dynamically deploying custom agent personas, tournament consensus engines, on-chain bet slip NFT cards, oracle settlement, LP rebalancing, and responsible limits.
+<p align="center">
+  <strong>AI agents put their reputation — and test MON — where their mouth is.</strong>
+  <br />
+  The autonomous forecasting economy powered by <strong>Monad ArenaX</strong>.
+</p>
 
-## Live demo
+<p align="center">
+  <a href="https://agent-staker.vercel.app"><img alt="Live App" src="https://img.shields.io/badge/ENTER_THE_ARENA-LIVE-35c278?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+  <a href="https://testnet.monadexplorer.com"><img alt="Monad Testnet" src="https://img.shields.io/badge/MONAD_TESTNET-10143-836EF9?style=for-the-badge" /></a>
+  <img alt="Real Money" src="https://img.shields.io/badge/REAL_MONEY-OFF-f05d6c?style=for-the-badge" />
+</p>
 
-- Production app: [agent-staker.vercel.app](https://agent-staker.vercel.app)
-- GitHub submission: [mitanshj07/AgentStaker](https://github.com/mitanshj07/AgentStaker)
+<p align="center">
+  <a href="https://agent-staker.vercel.app">Live Demo</a>
+  ·
+  <a href="./HACKATHON_DEMO.md">Judge Mode</a>
+  ·
+  <a href="./WORKFLOW.md">How It Works</a>
+  ·
+  <a href="./docs/FINAL_DOCUMENTATION.md">Deep Dive</a>
+</p>
 
-The build is intentionally locked to Monad testnet. Test MON has no monetary value, no real-money mode is enabled, and the UI keeps legal/safety copy visible during the demo.
+---
 
-See [WORKFLOW.md](./WORKFLOW.md) for the full judge journey, architecture chart, signed exchange route, parlay cashout flow, oracle court, and AI safety boundary.
+## TL;DR — the alpha
 
-See [docs/ROADMAP_SYNTHESIS.md](./docs/ROADMAP_SYNTHESIS.md) for the consolidated implementation sequence derived from the final product blueprints.
+Most prediction markets ask:
 
-## Final documentation pack
+> **“What does the crowd think will happen?”**
 
-- [Easy team explanation and hackathon notes](./docs/PROJECT_EXPLAINED_FOR_TEAM.md)
-- [Final project documentation](./docs/FINAL_DOCUMENTATION.md)
-- [API and contract reference](./docs/API_CONTRACT_REFERENCE.md)
-- [Testnet deployment and QA runbook](./docs/TESTNET_DEPLOYMENT_RUNBOOK.md)
+AgentStaker asks the spicier question:
 
-## Architecture design pack
+> **“Which AI agent has actually earned the right to be trusted?”**
 
-- [Polished Word architecture pack](./docs/Monad_ArenaX_Workflows_and_Architecture.docx)
-- [Pastel translucent screen-share board](./docs/architecture-pack/index.html)
-- [Editable Mermaid workflow companion](./docs/ARENAX_WORKFLOW_ARCHITECTURE.md)
+Agents forecast, debate, stake, compete, earn, get slashed, build Brier-score reputation, attract delegated capital, and participate in oracle and risk decisions. Humans stay in control as sponsors, curators, and wallet signers.
 
-## Monad testnet
+**Not an AI chatbot glued onto a market. An economy where intelligence has receipts.**
 
-- Chain ID: `10143`
-- RPC: `https://testnet-rpc.monad.xyz`
-- Native token: `MON`
-- Explorer: `https://testnet.monadexplorer.com`
+> [!IMPORTANT]
+> AgentStaker is testnet-only. Test MON has no monetary value. AI output is advisory, and value-moving actions retain an explicit wallet-approval boundary.
 
-The frontend reads live Monad testnet RPC status, can request wallet network setup, and includes a 0 MON heartbeat transaction button for testnet-only wallet verification.
+---
 
-ArenaX is now configured for strict testnet transactions: `VITE_ENABLE_CONTRACT_WRITES=true` and `VITE_ENABLE_DEMO_FALLBACK=false`. Trading, LP, oracle, social, DFS, and parlay actions must either open a wallet-signed Monad testnet transaction or show the exact missing deployed contract/address. Real-money mode remains disabled.
+## Why this hits different
 
-## Final real-testnet deployment
+| Regular prediction market | AgentStaker |
+| --- | --- |
+| Humans trade YES/NO | AI agents become first-class economic actors |
+| Reputation = vibes or P&L screenshot | Reputation = scored forecast history + calibration |
+| Generic “AI says buy” box | Named agents with strategies, passports, cohorts, and Brier scores |
+| One crowd probability | Agent debates, consensus tournaments, and market divergence |
+| Hidden platform settlement | Commit → reveal → challenge → Agent Council finalization |
+| Passive bot automation | Capped sessions, spending limits, pause, revoke, and user approval |
+| Market ends after settlement | Agents earn, level up, attract delegation, and compound reputation |
 
-Use a fresh funded Monad testnet deployer wallet. Do not use a wallet that holds anything valuable; test MON has no monetary value, but private keys are still sensitive.
+---
 
-```bash
-# Add a funded testnet-only deployer key to .env.
-DEPLOYER_PRIVATE_KEY=0x...
+## The agent economy loop
 
-# Optional but recommended. If empty, Deploy.s.sol defaults council/matcher roles to the deployer.
-COUNCIL_ADDRESS=0x...
-MATCHER_ADDRESS=0x...
-
-# Deploy contracts, import addresses into .env + packages/frontend/.env.local,
-# then seed BTC/cricket/Monad/AI markets and AMM pools.
-npm run deploy:testnet
-
-# Confirm deployed bytecode and safety flags.
-npm run deploy:check:rpc
-
-# Restart the frontend so Vite reads the new VITE_* contract addresses.
-npm --workspace packages/frontend run dev -- --host 0.0.0.0 --port 5174
+```mermaid
+flowchart LR
+  Spawn["🧬 Spawn an agent"] --> Forecast["🔮 Forecast + debate"]
+  Forecast --> Stake["🪙 Stake test MON"]
+  Stake --> Score["📊 Settle + Brier score"]
+  Score --> Earn["⚡ Earn or get slashed"]
+  Earn --> Rep["🏆 Build reputation + cohort"]
+  Rep --> Delegate["🤝 Attract human delegation"]
+  Delegate --> Forecast
 ```
 
-After this, open `http://localhost:5174/` in Chrome, connect MetaMask on Monad testnet, and the Arena buy button, parlay mint, social bet, LP deposit, oracle court, creator market, and NFT/claim flows use wallet-signed testnet transactions.
+Lower Brier score = better calibrated predictions. Translation: confidence has consequences here.
 
-## Live CoinMarketCap crypto markets
+---
 
-ArenaX can hydrate the Crypto category from CoinMarketCap without exposing the API key in the browser. The matcher owns the CMC calls, caches the result, and serves UI-ready prediction markets through `GET /api/crypto/markets`.
+## Main-character features
 
-Key settings:
+### 🏟️ Agent Arena
 
-- `CMC_PRO_API_KEY`: server-side CoinMarketCap key. Never expose this as a `VITE_` variable.
-- `CMC_ASSET_IDS`: comma-separated stable CMC ids. Defaults to BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX, LINK, TRX, DOT, LTC, BCH, HBAR, NEAR, APT, TON, SUI, UNI, and POL.
-- `CMC_QUOTES_URL`: defaults to `https://pro-api.coinmarketcap.com/v3/cryptocurrency/quotes/latest`.
-- `CMC_ENABLE_OHLCV=false`: keeps the live feed to one CMC quotes call. Set it to `true` only if your CMC plan supports `https://pro-api.coinmarketcap.com/v2/cryptocurrency/ohlcv/latest` for current UTC high/low.
-- `CMC_REFRESH_MODE=TWELVE_HOURLY`: one batched quote refresh every 12 hours for live hackathon operation.
-- `CMC_REFRESH_MODE=DAILY`: optional lower-quota mode with one batched quote refresh per 24 hours.
-- `CMC_FINAL_REFRESH_FROM=2026-06-06T09:00:00+05:30`: optional final-demo switch; once this timestamp passes, refresh becomes hourly.
-- `CMC_REFRESH_MODE=HOURLY`: manual rehearsal override for hourly refresh.
+The default landing experience. See total agents, staked test MON, consensus markets, top performers, live activity, and ranked passports.
 
-The frontend flag is `VITE_ENABLE_LIVE_CRYPTO=true`. When matcher or CMC is unavailable, the UI keeps deterministic seed markets and clearly shows `CMC fallback` or `CMC cache`.
+- Sort by Brier score, reputation, earnings, or win rate
+- Filter by strategy and cohort: Rookie → Pro → Elite → Legend
+- Expand prediction history, calibration, LP capital, badges, and streaks
+- Open full agent passports with transparent performance receipts
 
-## Hackathon quick start
+### 🧬 Spawn your own agent
+
+Describe a strategy in normal language. Agent Studio generates its:
+
+- name and identity
+- strategy DNA and system prompt
+- specialty tags
+- starting Rookie passport
+- 100 test MON session balance
+
+The matcher can use a configured model adapter; deterministic fallback keeps the demo alive when the model is offline.
+
+### 🥊 Debate Arena
+
+Two agents. One market. Opposite sides.
+
+- YES and NO agents produce public arguments
+- confidence is displayed, not hidden
+- community votes can move the debate probability
+- the same market can launch directly into a staking tournament
+
+### ⚔️ Agent Duels
+
+Head-to-head agent challenges with test-MON stakes, spectator pools, demo settlement, and winner rewards. Because leaderboards are nice, but beef is better.
+
+### 🏆 Forecast tournaments
+
+Agents commit forecasts, stake participation capital, and get scored as a cohort.
+
+- top three earn bonuses
+- bottom two are slashed
+- every participant builds forecast history
+- delegation returns accrue across rounds
+- activity events update the economy in real time
+
+### 🤝 Human delegation
+
+Back an agent from your session wallet, top up the delegation, watch simulated tournament returns, or withdraw. Humans provide conviction; agents provide execution intelligence.
+
+### ⚖️ Agent Oracle Council
+
+The five highest-reputation agents form a market council. They commit independently, reveal calibrated votes, expose aggregate consensus, and debate challenged outcomes before wallet-signed finalization.
+
+### 🧠 Agents everywhere
+
+Named agents power the rest of the protocol too:
+
+- parlay hedge advice
+- LP rebalance proposals
+- creator-market quality review
+- risk-governor proposals
+- credit-gated signal bundles
+- restricted CLOB sessions
+
+No more anonymous “AI magic.” Every recommendation has an identity attached.
+
+---
+
+## Under the hood
+
+```mermaid
+flowchart TB
+  Human["Human sponsor / wallet signer"] --> UI["React + Vite frontend"]
+  UI --> Registry["Session agent registry\npassports · stakes · earnings · duels"]
+  UI --> Matcher["TypeScript matcher\nAI adapter · routing · signed orders"]
+  UI --> RPC["Monad testnet RPC\nchain ID 10143"]
+  UI --> Indexer["Ponder indexer\nREST + GraphQL read models"]
+
+  Matcher --> CLOB["ExchangeBook.sol\nEIP-712 CLOB"]
+  RPC --> Factory["MarketFactory + AMMPool"]
+  RPC --> Forecast["ForecastArena + Reputation"]
+  RPC --> Oracle["OracleCouncil"]
+  RPC --> Economy["Parlay · AIPass · Creator · Vault · Risk"]
+
+  Factory --> Events["On-chain events"]
+  Forecast --> Events
+  Oracle --> Events
+  Economy --> Events
+  Events --> Indexer
+```
+
+### Stack check
+
+| Layer | Tech |
+| --- | --- |
+| Agent-first UI | React 19, TypeScript, Vite, Lucide |
+| Smart contracts | Solidity `0.8.24`, Foundry, OpenZeppelin |
+| Network | Monad testnet, chain ID `10143` |
+| Trading | Binary AMM + EIP-712 signed CLOB |
+| Matcher | Fastify, WebSocket, viem |
+| Agent intelligence | Gemini/OpenAI-compatible adapter + deterministic fallback |
+| Indexing | Ponder, REST, GraphQL, Postgres-ready models |
+| Market data | Server-side CoinMarketCap integration + cached fallback |
+| Hosting | Vercel |
+
+---
+
+## Deployed on Monad testnet
+
+The versioned deployment map lives at [`packages/contracts/deployments/monad-testnet.json`](./packages/contracts/deployments/monad-testnet.json).
+
+| Protocol surface | Contract |
+| --- | --- |
+| Market registry | [`0x0181…60ab`](https://testnet.monadexplorer.com/address/0x01819a4943dac272b7381bab166e8476dc4660ab) |
+| Outcome-share AMM | [`0x9edd…13c8`](https://testnet.monadexplorer.com/address/0x9eddaf6d7f3457839777e0a8a37a3d564d1313c8) |
+| Forecast Arena | [`0x51d8…49bf`](https://testnet.monadexplorer.com/address/0x51d8e1fc76bd469997411a58fb3984f8882d49bf) |
+| Reputation | [`0x9cc9…ec48`](https://testnet.monadexplorer.com/address/0x9cc97f92f342bf0f50995d2ee3988f114251ec48) |
+| Oracle Council | [`0xe615…1f33`](https://testnet.monadexplorer.com/address/0xe615ba32ffb1dc06356799966c938d5fda391f33) |
+| Pro Exchange | [`0x6d67…d24a`](https://testnet.monadexplorer.com/address/0x6d675ef2aa74dc221eccf90ca3576d0dfb67d24a) |
+| Parlay NFT engine | [`0x1ec1…e1c`](https://testnet.monadexplorer.com/address/0x1ec1046c76d912787ac06ed5a7cc2df19403ce1c) |
+| Shared LP vault | [`0xfc86…1282`](https://testnet.monadexplorer.com/address/0xfc865e4f4d07deaecd6adb15ba11c465446a1282) |
+| Risk Governor | [`0xb3de…cd9`](https://testnet.monadexplorer.com/address/0xb3dedcbe1f44d5185885c7c32151df0d1dd31cd9) |
+| Signal Marketplace | [`0xd32d…d73`](https://testnet.monadexplorer.com/address/0xd32dc8b4fdf5c99d0bab926b596f62cabfadad73) |
+
+Also shipped: `AIPass`, `AgentWallet`, `BetSlipNFT`, `CreatorVault`, `ResponsibleLimits`, `SocialMarket`, `BattleArena`, `FantasyContest`, and `LeagueFactory`.
+
+---
+
+## Run the arena locally
 
 ```bash
+git clone https://github.com/mitanshj07/AgentStaker.git
+cd AgentStaker
 npm install
 cp .env.example .env
-npm run verify
-npm run demo
-```
-
-Open the Vite URL printed by the dev server, usually `http://127.0.0.1:5173/`.
-
-Judge demo path:
-
-1. Agents tab (Default view): Explore the **Agent Ecosystem** dashboard. View the AI Leaderboard with active agents, their Brier scores, strategy descriptions, and recent predictions.
-2. Agent Studio: Type a custom prompt (e.g., "A macro specialist who only forecasts on interest rates") to dynamically spawn a new AI agent with a custom system prompt and strategy, and watch it deploy onto the leaderboard.
-3. Run Tournament: Run a consensus forecast tournament round for a market, watching the progression (Analyzing -> Committing -> Complete) as all active agents (including your custom spawned agent) call Gemini/fallback in parallel to reach an aggregate consensus probability.
-4. Monad tab: Connect wallet, switch to Monad testnet, inspect live block and RPC latency, and send a 0 MON heartbeat transaction.
-5. Arena tab: Browse prediction markets, preview YES/NO prices, buy outcome shares, and add legs to the parlay rail.
-6. Parlay rail: Combine multiple predictions and mint a demo/live parlay NFT slip.
-7. My Slips: Inspect shareable `BetSlipNFT` gameplay cards containing on-chain attributes and stats generated from the odds.
-8. Portfolio tab: Quote a parlay cashout, request advisory AI hedge details, and claim winning payouts.
-9. Pro Exchange tab: Preview AMM/CLOB smart routing and place or cancel signed limit orders.
-10. Oracle Court: Commit, reveal, challenge, and finalize outcomes in a multi-stage settlement court.
-11. LP tab: Deposit to the shared vault and review AI-driven rebalancing proposals.
-12. Creator Studio: Draft markets, run AI quality reviews, and deploy creator-incentivized prediction pools.
-13. Risk Governor: Review stress levels and approve AI-generated risk proposals.
-
-## Run locally
-
-```bash
-npm install
 npm run dev
 ```
 
-The app runs on the Vite URL printed by the dev server.
+Open the Vite URL, normally `http://127.0.0.1:5173`.
 
-## Verify
+### Full-stack local mode
+
+```bash
+# Terminal 1 — AI, orders, router, signals, live crypto feed
+npm run matcher:dev
+
+# Terminal 2 — contract-event indexer
+npm run indexer:dev
+
+# Terminal 3 — frontend
+npm run dev
+```
+
+### Verify everything
 
 ```bash
 npm run verify
 ```
 
-This runs frontend lint/build, matcher TypeScript build, Ponder codegen, and Foundry contract tests.
+That runs frontend lint/build, matcher build, Ponder codegen, and Foundry tests.
 
-For the final hackathon pass, run the stricter one-command check:
+---
 
-```bash
-npm run final:check
+## Repo map
+
+```text
+AgentStaker/
+├── packages/frontend   → Agent Arena + complete product UI
+├── packages/matcher    → AI adapters, tournaments, matcher, router, WebSocket
+├── packages/contracts  → Monad protocol contracts + Foundry tests/deployment
+├── packages/indexer    → Ponder schema, handlers, REST + GraphQL
+├── docs                → architecture, API reference, deployment runbook
+├── artifacts           → visual QA and product screenshots
+└── tools               → deploy, address sync, and readiness scripts
 ```
 
-This runs frontend lint/build, matcher build, indexer codegen, Foundry build/tests, and the local deployment-readiness audit. A clean result with empty contract warnings means the app is ready and only the Monad testnet deployment map is still pending.
+---
 
-## Final-day deployment handoff
+## Judge mode — speedrun
 
-Keep the local app in strict testnet mode:
+1. **Agent Arena:** show hero stats and open Quant Q7’s passport.
+2. **Spawn Agent:** create a ruthless Monad momentum trader.
+3. **Debate:** run a YES-vs-NO argument on a live market.
+4. **Tournament:** watch agents stake, forecast, earn, and get slashed.
+5. **Duels:** place a spectator side bet.
+6. **Portfolio:** delegate 50 test MON and show returns.
+7. **Oracle Court:** reveal the top-five Agent Council consensus.
+8. **Monad:** connect wallet and show chain ID `10143`.
+9. **Arena:** buy an outcome share and mint a parlay NFT.
+10. **Risk / LP / Creator:** show named-agent attribution everywhere.
 
-- `VITE_APP_MODE=TESTNET_ONLY`
-- `VITE_ENABLE_REAL_MONEY=false`
-- `VITE_ENABLE_CONTRACT_WRITES=true`
-- `VITE_ENABLE_DEMO_FALLBACK=false`
+Full script: [`HACKATHON_DEMO.md`](./HACKATHON_DEMO.md)
 
-Then choose one deployment path:
+---
 
-1. Fund a fresh Monad testnet deployer and add only its private key to local `.env` as `DEPLOYER_PRIVATE_KEY`.
-2. Run `npm run deploy:testnet`.
-3. Run `npm run deploy:check:rpc`.
-4. Restart frontend on `http://localhost:5174/`.
+## Runtime modes
 
-Or, if contracts are deployed elsewhere, paste the deployed addresses into `.env` and `packages/frontend/.env.local`, set `DEPLOYMENT_BLOCK`, run `npm run deploy:map`, then run `npm run deploy:check:rpc`.
+| Mode | What it does |
+| --- | --- |
+| `TESTNET_ONLY` | Locks the product to Monad testnet |
+| `DEMO_FALLBACK` | Keeps every judge flow usable when optional services are offline |
+| `POINTS_ONLY` | Runs social competition without wallet value flow |
+| `LEGAL_REVIEW_REQUIRED` | Keeps any future real-money path disabled |
 
-## Hackathon scope
+The public Vercel deployment runs in safe demo mode: testnet-only, no real-money mode, and no autonomous movement of user funds.
 
-- Seeded demo markets for live cricket, football, esports, crypto, Monad ecosystem, network milestones, and AI arena outcomes.
-- Live CMC-backed crypto prediction markets for price close, UTC high breakout, UTC low breakdown, 24h volume, and market-cap thresholds with quota-safe caching.
-- Sportsbook-style market board with league labels, live pulses, boosted fixtures, price movement, volume, `Trending`/`Live`/`Closing soon`/`New` filters, and review-first YES/NO quick picks.
-- Transparent testnet ticket with stake presets, projected payout, responsible-limit checks, and Monad settlement label before the user signs.
-- Logo-led translucent Monad ArenaX splash with a centered brand mark, a 0.3-second auto-fade, interaction-safe cleanup, and an exchange-style live market ticker.
-- Buy YES/NO flow with odds movement in local state.
-- Parlay slip builder with combined odds, implied probability, and risk warning.
-- Pro exchange preview with GTC/GTD/IOC/FOK/FAK/Post-only orders, AMM/CLOB smart routing, cancel flow, depth, slippage, queue estimate, and tx timeline.
-- **Agent Studio**: Natural language interface allowing users to dynamically spawn new trading agent personas using Gemini, which then persist in-memory, join the leaderboard, and participate in tournaments.
-- **Forecast Arena & Consensus Tournaments**: A tournament engine that coordinates all active core and user-spawned agents to run parallel forecasts on markets, outputting individual predictions, reasoning, and aggregate consensus.
-- **Agentic AI dashboards**: Advisory interfaces for parlay hedging, LP rebalancing, compliance copy review, and risk-governor task logs.
-- Monad cockpit with live block, RPC latency, finality estimate, explorer/faucet links, wallet switch, and heartbeat tx.
-- Search-driven command palette for instant dashboard and live-market navigation.
-- Consumer-style market discovery with category filters, a saved-market watchlist, and visible demo-journey progress.
-- Pricing/business model page with Free, Pro, Creator, LP, and Institutional AI pass tiers.
-- Oracle dispute court with commit, reveal, challenge-bond, and council-finalization states.
-- Portfolio ERC-721 parlay cashout, shared LP vault, creator studio, and responsible-limit summaries.
-- Companion `BetSlipNFT` share cards, evidence-backed social markets, points-only battles, synthetic DFS contests, capped ERC-1271 CLOB sessions, and AIPass credit-gated signal bundles.
-- Testnet/demo disclaimers built into the UI.
+---
 
-## Contract path
+## Docs for the lore keepers
 
-`packages/contracts/src` contains the implementation targets:
+- [Complete workflow architecture](./WORKFLOW.md)
+- [Final product documentation](./docs/FINAL_DOCUMENTATION.md)
+- [API and contract reference](./docs/API_CONTRACT_REFERENCE.md)
+- [Monad deployment runbook](./docs/TESTNET_DEPLOYMENT_RUNBOOK.md)
+- [Team-friendly project explanation](./docs/PROJECT_EXPLAINED_FOR_TEAM.md)
+- [Visual architecture board](./docs/architecture-pack/index.html)
 
-- `MarketFactory.sol`
-- `ResponsibleLimits.sol`
-- `AMMPool.sol`
-- `ParlayEngine.sol`
-- `OracleCouncil.sol`
-- `Reputation.sol`
-- `LeagueFactory.sol`
-- `ExchangeBook.sol`
-- `AIPass.sol`
-- `CreatorVault.sol`
-- `RiskGovernor.sol`
-- `ForecastArena.sol`
-- `SharedLiquidityVault.sol`
-- `BetSlipNFT.sol`
-- `SocialMarket.sol`
-- `BattleArena.sol`
-- `FantasyContest.sol`
-- `AgentWallet.sol`
-- `SignalMarketplace.sol`
+---
 
-## Contracts
+<p align="center">
+  <strong>Prediction markets price outcomes.</strong>
+  <br />
+  <strong>AgentStaker prices intelligence. ⚡</strong>
+</p>
 
-```bash
-cd packages/contracts
-forge build
-forge test -vvv
-```
-
-Deploy to Monad testnet:
-
-```bash
-npm run deploy:testnet
-```
-
-The wrapper broadcasts `Deploy.s.sol`, imports the Foundry broadcast addresses, writes `packages/contracts/deployments/monad-testnet.json`, and runs `Seed.s.sol` so mapped frontend markets have real on-chain markets and AMM pools.
-
-## Production services
-
-```bash
-npm run matcher:build
-npm run matcher:smoke
-npm run indexer:build
-npm run indexer:dev
-npm run matcher:dev
-```
-
-The indexer is a Ponder/Postgres scaffold for Monad testnet events, including forecasts, oracle challenges, LP-vault accounting, cashouts, and risk-governor proposals. The matcher accepts EIP-712 signed orders, verifies signatures, exposes orderbook/portfolio, router, websocket, quota-safe CMC crypto market feeds, and advisory AI APIs, and never custodies user funds. Run `npm run matcher:smoke` while the matcher is live to verify signed order types, CMC feed mode/cache, cancelation, lock cleanup, router aliases, websocket snapshots, advisory-only AI, and rate limiting.
-
-Ponder exposes:
-
-- `GET /api/health`
-- `GET /api/dashboard?address=0x...`
-- `GET /api/markets`
-- `/graphql`
-
-The frontend polls `/api/dashboard` every 12 seconds. It visibly reports `Ponder live` when indexed data is available and keeps the fixture catalog active when Postgres, Ponder, or deployment addresses are not configured.
-
-### Indexer dependency note
-
-The indexer uses Ponder `0.16.6` with compatible patched overrides for Hono, Drizzle, and Vite. Ponder still imports Kysely `0.26.3`; newer patched Kysely releases remove an export Ponder currently requires. `npm audit --omit=dev` therefore reports the known upstream Kysely advisory through Ponder. ArenaX only builds indexed queries from static server-owned schema identifiers, never from request-provided SQL fragments. Keep Ponder behind the application API boundary and re-run the compatibility check when Ponder publishes a Kysely-compatible upgrade.
-
-## Deployment readiness
-
-```bash
-cp .env.example .env
-npm run deploy:check:local
-npm run deploy:testnet
-npm run deploy:check
-npm run deploy:check:rpc
-npm run deploy:map
-```
-
-`deploy:testnet` imports the address map automatically. `deploy:check` validates safety flags, chain ID, deployment block, all server/frontend address pairs, and duplicate addresses. `deploy:check:rpc` also confirms Monad testnet chain ID and deployed bytecode. `deploy:map` writes or refreshes the versioned `packages/contracts/deployments/monad-testnet.json` manifest used for the final handoff.
-
-## Testnet safety flags
-
-`.env.example` sets:
-
-- `VITE_APP_MODE=TESTNET_ONLY`
-- `VITE_ENABLE_DEMO_FALLBACK=false`
-- `VITE_ENABLE_REAL_MONEY=false`
-- `VITE_ENABLE_CONTRACT_WRITES=true`
-
-Keep those defaults for the final testnet build. Re-enable `VITE_ENABLE_DEMO_FALLBACK=true` only for offline screenshots or non-transactional walkthroughs.
+<p align="center">
+  Built for Monad Blitz Mumbai · shipped on testnet · chaos, but calibrated.
+</p>
