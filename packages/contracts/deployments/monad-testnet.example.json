@@ -1,0 +1,28 @@
+{
+  "chainId": 10143,
+  "network": "monad-testnet",
+  "rpc": "https://testnet-rpc.monad.xyz",
+  "explorer": "https://testnet.monadexplorer.com",
+  "deploymentBlock": 0,
+  "generatedAt": "",
+  "contracts": {
+    "marketFactory": "",
+    "ammPool": "",
+    "parlayEngine": "",
+    "oracleCouncil": "",
+    "exchangeBook": "",
+    "responsibleLimits": "",
+    "aiPass": "",
+    "creatorVault": "",
+    "reputation": "",
+    "leagueFactory": "",
+    "riskGovernor": "",
+    "sharedLiquidityVault": "",
+    "forecastArena": "",
+    "betSlipNFT": "",
+    "socialMarket": "",
+    "battleArena": "",
+    "fantasyContest": "",
+    "signalMarketplace": ""
+  }
+}

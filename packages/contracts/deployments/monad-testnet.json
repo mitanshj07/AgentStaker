@@ -1,0 +1,28 @@
+{
+  "chainId": 10143,
+  "network": "monad-testnet",
+  "rpc": "https://testnet-rpc.monad.xyz",
+  "explorer": "https://testnet.monadexplorer.com",
+  "deploymentBlock": 38903591,
+  "generatedAt": "2026-06-17T19:41:28.300Z",
+  "contracts": {
+    "marketFactory": "0x01819a4943dac272b7381bab166e8476dc4660ab",
+    "ammPool": "0x9eddaf6d7f3457839777e0a8a37a3d564d1313c8",
+    "parlayEngine": "0x1ec1046c76d912787ac06ed5a7cc2df19403ce1c",
+    "oracleCouncil": "0xe615ba32ffb1dc06356799966c938d5fda391f33",
+    "exchangeBook": "0x6d675ef2aa74dc221eccf90ca3576d0dfb67d24a",
+    "responsibleLimits": "0x50d3eacb039472ab5c0231745452847afe309e69",
+    "aiPass": "0x56e39f3fea48c10896799f8f3d23e1b91749090b",
+    "creatorVault": "0x2bdfc742014d771013cc1a7906c374cabf8c602a",
+    "reputation": "0x9cc97f92f342bf0f50995d2ee3988f114251ec48",
+    "leagueFactory": "0x2b871e32310861e8be6a0f961159b86c3e08c0d7",
+    "riskGovernor": "0xb3dedcbe1f44d5185885c7c32151df0d1dd31cd9",
+    "sharedLiquidityVault": "0xfc865e4f4d07deaecd6adb15ba11c465446a1282",
+    "forecastArena": "0x51d8e1fc76bd469997411a58fb3984f8882d49bf",
+    "betSlipNFT": "0xd23e01a1cbfdcf5e4c6a2852e9aa1da228f7e730",
+    "socialMarket": "0x79ee32345b2991b3c3f19510df662ccd73033b62",
+    "battleArena": "0xcc732357e3f2688abedfd4f2e1026bdcb0d5a62e",
+    "fantasyContest": "0x4bdacba3d6386f9f68964cd17f82cdb00b388ba5",
+    "signalMarketplace": "0xd32dc8b4fdf5c99d0bab926b596f62cabfadad73"
+  }
+}

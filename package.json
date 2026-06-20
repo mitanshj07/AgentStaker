@@ -1,0 +1,39 @@
+{
+  "name": "monad-arenax",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/frontend",
+    "packages/indexer",
+    "packages/matcher"
+  ],
+  "scripts": {
+    "dev": "npm --workspace packages/frontend run dev",
+    "demo": "npm run dev",
+    "build": "npm --workspace packages/frontend run build",
+    "lint": "npm --workspace packages/frontend run lint",
+    "verify": "npm run lint && npm run build && npm run matcher:build && npm run indexer:build && npm run contracts:test",
+    "final:check": "npm run lint && npm run build && npm run matcher:build && npm run indexer:build && npm run contracts:build && npm run contracts:test && npm run deploy:check:local",
+    "contracts:build": "cd packages/contracts && forge build",
+    "contracts:test": "cd packages/contracts && forge test -vvv",
+    "matcher:build": "npm --workspace packages/matcher run build",
+    "matcher:dev": "npm --workspace packages/matcher run dev",
+    "matcher:smoke": "npm --workspace packages/matcher run smoke",
+    "indexer:build": "npm --workspace packages/indexer run build",
+    "indexer:dev": "npm --workspace packages/indexer run dev",
+    "deploy:check": "node tools/check-deployment.mjs",
+    "deploy:check:local": "node tools/check-deployment.mjs --allow-empty",
+    "deploy:check:rpc": "node tools/check-deployment.mjs --rpc",
+    "deploy:map": "node tools/sync-deployment-map.mjs",
+    "deploy:import": "node tools/import-foundry-broadcast.mjs",
+    "deploy:testnet": "node tools/deploy-monad-testnet.mjs"
+  },
+  "overrides": {
+    "kysely": "0.26.3",
+    "ponder@0.16.6": {
+      "@hono/node-server": "1.19.13",
+      "drizzle-orm": "0.45.2",
+      "vite": "6.4.2"
+    }
+  }
+}

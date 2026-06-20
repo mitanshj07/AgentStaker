@@ -1,0 +1,1260 @@
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+scalar BigInt
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type ViewPageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+type Meta {
+  status: JSON
+}
+
+type Query {
+  markets(id: BigInt!): markets
+  marketss(where: marketsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): marketsPage!
+  trades(id: String!): trades
+  tradess(where: tradesFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): tradesPage!
+  orders(orderHash: String!): orders
+  orderss(where: ordersFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): ordersPage!
+  cancellations(maker: String!, nonce: BigInt!): cancellations
+  cancellationss(where: cancellationsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): cancellationsPage!
+  riskProposals(id: BigInt!): riskProposals
+  riskProposalss(where: riskProposalsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): riskProposalsPage!
+  parlays(id: BigInt!): parlays
+  parlayss(where: parlaysFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): parlaysPage!
+  forecasts(agent: String!, marketId: BigInt!): forecasts
+  forecastss(where: forecastsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): forecastsPage!
+  oracleCases(marketId: BigInt!): oracleCases
+  oracleCasess(where: oracleCasesFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): oracleCasesPage!
+  protocolEvents(id: String!): protocolEvents
+  protocolEventss(where: protocolEventsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): protocolEventsPage!
+  betSlips(id: BigInt!): betSlips
+  betSlipss(where: betSlipsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): betSlipsPage!
+  socialMarkets(id: BigInt!): socialMarkets
+  socialMarketss(where: socialMarketsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): socialMarketsPage!
+  battleResults(id: BigInt!): battleResults
+  battleResultss(where: battleResultsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): battleResultsPage!
+  signals(id: BigInt!): signals
+  signalss(where: signalsFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): signalsPage!
+  fantasyEntries(contestId: BigInt!, user: String!): fantasyEntries
+  fantasyEntriess(where: fantasyEntriesFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int, offset: Int): fantasyEntriesPage!
+  _meta: Meta
+}
+
+type markets {
+  id: BigInt!
+  creator: String!
+  question: String!
+  category: String!
+  state: String!
+  volume: BigInt!
+  liquidity: BigInt!
+  resolvedOutcome: BigInt
+  updatedAt: Int!
+}
+
+type marketsPage {
+  items: [markets!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input marketsFilter {
+  AND: [marketsFilter]
+  OR: [marketsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  creator: String
+  creator_not: String
+  creator_in: [String]
+  creator_not_in: [String]
+  creator_contains: String
+  creator_not_contains: String
+  creator_starts_with: String
+  creator_ends_with: String
+  creator_not_starts_with: String
+  creator_not_ends_with: String
+  question: String
+  question_not: String
+  question_in: [String]
+  question_not_in: [String]
+  question_contains: String
+  question_not_contains: String
+  question_starts_with: String
+  question_ends_with: String
+  question_not_starts_with: String
+  question_not_ends_with: String
+  question_contains_nocase: String
+  question_not_contains_nocase: String
+  question_starts_with_nocase: String
+  question_ends_with_nocase: String
+  question_not_starts_with_nocase: String
+  question_not_ends_with_nocase: String
+  category: String
+  category_not: String
+  category_in: [String]
+  category_not_in: [String]
+  category_contains: String
+  category_not_contains: String
+  category_starts_with: String
+  category_ends_with: String
+  category_not_starts_with: String
+  category_not_ends_with: String
+  category_contains_nocase: String
+  category_not_contains_nocase: String
+  category_starts_with_nocase: String
+  category_ends_with_nocase: String
+  category_not_starts_with_nocase: String
+  category_not_ends_with_nocase: String
+  state: String
+  state_not: String
+  state_in: [String]
+  state_not_in: [String]
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_ends_with: String
+  state_not_starts_with: String
+  state_not_ends_with: String
+  state_contains_nocase: String
+  state_not_contains_nocase: String
+  state_starts_with_nocase: String
+  state_ends_with_nocase: String
+  state_not_starts_with_nocase: String
+  state_not_ends_with_nocase: String
+  volume: BigInt
+  volume_not: BigInt
+  volume_in: [BigInt]
+  volume_not_in: [BigInt]
+  volume_gt: BigInt
+  volume_lt: BigInt
+  volume_gte: BigInt
+  volume_lte: BigInt
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_in: [BigInt]
+  liquidity_not_in: [BigInt]
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  resolvedOutcome: BigInt
+  resolvedOutcome_not: BigInt
+  resolvedOutcome_in: [BigInt]
+  resolvedOutcome_not_in: [BigInt]
+  resolvedOutcome_gt: BigInt
+  resolvedOutcome_lt: BigInt
+  resolvedOutcome_gte: BigInt
+  resolvedOutcome_lte: BigInt
+  updatedAt: Int
+  updatedAt_not: Int
+  updatedAt_in: [Int]
+  updatedAt_not_in: [Int]
+  updatedAt_gt: Int
+  updatedAt_lt: Int
+  updatedAt_gte: Int
+  updatedAt_lte: Int
+}
+
+type trades {
+  id: String!
+  marketId: BigInt!
+  trader: String!
+  outcomeIndex: BigInt!
+  amountIn: BigInt!
+  sharesOut: BigInt!
+  newOdds: BigInt!
+  blockNumber: BigInt!
+}
+
+type tradesPage {
+  items: [trades!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input tradesFilter {
+  AND: [tradesFilter]
+  OR: [tradesFilter]
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  id_starts_with: String
+  id_ends_with: String
+  id_not_starts_with: String
+  id_not_ends_with: String
+  id_contains_nocase: String
+  id_not_contains_nocase: String
+  id_starts_with_nocase: String
+  id_ends_with_nocase: String
+  id_not_starts_with_nocase: String
+  id_not_ends_with_nocase: String
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  trader: String
+  trader_not: String
+  trader_in: [String]
+  trader_not_in: [String]
+  trader_contains: String
+  trader_not_contains: String
+  trader_starts_with: String
+  trader_ends_with: String
+  trader_not_starts_with: String
+  trader_not_ends_with: String
+  outcomeIndex: BigInt
+  outcomeIndex_not: BigInt
+  outcomeIndex_in: [BigInt]
+  outcomeIndex_not_in: [BigInt]
+  outcomeIndex_gt: BigInt
+  outcomeIndex_lt: BigInt
+  outcomeIndex_gte: BigInt
+  outcomeIndex_lte: BigInt
+  amountIn: BigInt
+  amountIn_not: BigInt
+  amountIn_in: [BigInt]
+  amountIn_not_in: [BigInt]
+  amountIn_gt: BigInt
+  amountIn_lt: BigInt
+  amountIn_gte: BigInt
+  amountIn_lte: BigInt
+  sharesOut: BigInt
+  sharesOut_not: BigInt
+  sharesOut_in: [BigInt]
+  sharesOut_not_in: [BigInt]
+  sharesOut_gt: BigInt
+  sharesOut_lt: BigInt
+  sharesOut_gte: BigInt
+  sharesOut_lte: BigInt
+  newOdds: BigInt
+  newOdds_not: BigInt
+  newOdds_in: [BigInt]
+  newOdds_not_in: [BigInt]
+  newOdds_gt: BigInt
+  newOdds_lt: BigInt
+  newOdds_gte: BigInt
+  newOdds_lte: BigInt
+  blockNumber: BigInt
+  blockNumber_not: BigInt
+  blockNumber_in: [BigInt]
+  blockNumber_not_in: [BigInt]
+  blockNumber_gt: BigInt
+  blockNumber_lt: BigInt
+  blockNumber_gte: BigInt
+  blockNumber_lte: BigInt
+}
+
+type orders {
+  orderHash: String!
+  maker: String!
+  taker: String!
+  marketId: BigInt!
+  outcomeIndex: BigInt!
+  side: Int!
+  fillSize: BigInt!
+  price1e18: BigInt!
+  status: String!
+}
+
+type ordersPage {
+  items: [orders!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input ordersFilter {
+  AND: [ordersFilter]
+  OR: [ordersFilter]
+  orderHash: String
+  orderHash_not: String
+  orderHash_in: [String]
+  orderHash_not_in: [String]
+  orderHash_contains: String
+  orderHash_not_contains: String
+  orderHash_starts_with: String
+  orderHash_ends_with: String
+  orderHash_not_starts_with: String
+  orderHash_not_ends_with: String
+  maker: String
+  maker_not: String
+  maker_in: [String]
+  maker_not_in: [String]
+  maker_contains: String
+  maker_not_contains: String
+  maker_starts_with: String
+  maker_ends_with: String
+  maker_not_starts_with: String
+  maker_not_ends_with: String
+  taker: String
+  taker_not: String
+  taker_in: [String]
+  taker_not_in: [String]
+  taker_contains: String
+  taker_not_contains: String
+  taker_starts_with: String
+  taker_ends_with: String
+  taker_not_starts_with: String
+  taker_not_ends_with: String
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  outcomeIndex: BigInt
+  outcomeIndex_not: BigInt
+  outcomeIndex_in: [BigInt]
+  outcomeIndex_not_in: [BigInt]
+  outcomeIndex_gt: BigInt
+  outcomeIndex_lt: BigInt
+  outcomeIndex_gte: BigInt
+  outcomeIndex_lte: BigInt
+  side: Int
+  side_not: Int
+  side_in: [Int]
+  side_not_in: [Int]
+  side_gt: Int
+  side_lt: Int
+  side_gte: Int
+  side_lte: Int
+  fillSize: BigInt
+  fillSize_not: BigInt
+  fillSize_in: [BigInt]
+  fillSize_not_in: [BigInt]
+  fillSize_gt: BigInt
+  fillSize_lt: BigInt
+  fillSize_gte: BigInt
+  fillSize_lte: BigInt
+  price1e18: BigInt
+  price1e18_not: BigInt
+  price1e18_in: [BigInt]
+  price1e18_not_in: [BigInt]
+  price1e18_gt: BigInt
+  price1e18_lt: BigInt
+  price1e18_gte: BigInt
+  price1e18_lte: BigInt
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+}
+
+type cancellations {
+  maker: String!
+  nonce: BigInt!
+  blockNumber: BigInt!
+}
+
+type cancellationsPage {
+  items: [cancellations!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input cancellationsFilter {
+  AND: [cancellationsFilter]
+  OR: [cancellationsFilter]
+  maker: String
+  maker_not: String
+  maker_in: [String]
+  maker_not_in: [String]
+  maker_contains: String
+  maker_not_contains: String
+  maker_starts_with: String
+  maker_ends_with: String
+  maker_not_starts_with: String
+  maker_not_ends_with: String
+  nonce: BigInt
+  nonce_not: BigInt
+  nonce_in: [BigInt]
+  nonce_not_in: [BigInt]
+  nonce_gt: BigInt
+  nonce_lt: BigInt
+  nonce_gte: BigInt
+  nonce_lte: BigInt
+  blockNumber: BigInt
+  blockNumber_not: BigInt
+  blockNumber_in: [BigInt]
+  blockNumber_not_in: [BigInt]
+  blockNumber_gt: BigInt
+  blockNumber_lt: BigInt
+  blockNumber_gte: BigInt
+  blockNumber_lte: BigInt
+}
+
+type riskProposals {
+  id: BigInt!
+  agent: String!
+  user: String!
+  kind: Int!
+  marketId: BigInt!
+  value: BigInt!
+  riskScoreBps: BigInt!
+  correlationBps: BigInt!
+  simulationHash: String!
+  status: String!
+}
+
+type riskProposalsPage {
+  items: [riskProposals!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input riskProposalsFilter {
+  AND: [riskProposalsFilter]
+  OR: [riskProposalsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  agent: String
+  agent_not: String
+  agent_in: [String]
+  agent_not_in: [String]
+  agent_contains: String
+  agent_not_contains: String
+  agent_starts_with: String
+  agent_ends_with: String
+  agent_not_starts_with: String
+  agent_not_ends_with: String
+  user: String
+  user_not: String
+  user_in: [String]
+  user_not_in: [String]
+  user_contains: String
+  user_not_contains: String
+  user_starts_with: String
+  user_ends_with: String
+  user_not_starts_with: String
+  user_not_ends_with: String
+  kind: Int
+  kind_not: Int
+  kind_in: [Int]
+  kind_not_in: [Int]
+  kind_gt: Int
+  kind_lt: Int
+  kind_gte: Int
+  kind_lte: Int
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  value: BigInt
+  value_not: BigInt
+  value_in: [BigInt]
+  value_not_in: [BigInt]
+  value_gt: BigInt
+  value_lt: BigInt
+  value_gte: BigInt
+  value_lte: BigInt
+  riskScoreBps: BigInt
+  riskScoreBps_not: BigInt
+  riskScoreBps_in: [BigInt]
+  riskScoreBps_not_in: [BigInt]
+  riskScoreBps_gt: BigInt
+  riskScoreBps_lt: BigInt
+  riskScoreBps_gte: BigInt
+  riskScoreBps_lte: BigInt
+  correlationBps: BigInt
+  correlationBps_not: BigInt
+  correlationBps_in: [BigInt]
+  correlationBps_not_in: [BigInt]
+  correlationBps_gt: BigInt
+  correlationBps_lt: BigInt
+  correlationBps_gte: BigInt
+  correlationBps_lte: BigInt
+  simulationHash: String
+  simulationHash_not: String
+  simulationHash_in: [String]
+  simulationHash_not_in: [String]
+  simulationHash_contains: String
+  simulationHash_not_contains: String
+  simulationHash_starts_with: String
+  simulationHash_ends_with: String
+  simulationHash_not_starts_with: String
+  simulationHash_not_ends_with: String
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+}
+
+type parlays {
+  id: BigInt!
+  owner: String!
+  legs: BigInt!
+  stake: BigInt!
+  payout: BigInt!
+  cashoutValue: BigInt!
+  status: String!
+}
+
+type parlaysPage {
+  items: [parlays!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input parlaysFilter {
+  AND: [parlaysFilter]
+  OR: [parlaysFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  owner: String
+  owner_not: String
+  owner_in: [String]
+  owner_not_in: [String]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_ends_with: String
+  owner_not_starts_with: String
+  owner_not_ends_with: String
+  legs: BigInt
+  legs_not: BigInt
+  legs_in: [BigInt]
+  legs_not_in: [BigInt]
+  legs_gt: BigInt
+  legs_lt: BigInt
+  legs_gte: BigInt
+  legs_lte: BigInt
+  stake: BigInt
+  stake_not: BigInt
+  stake_in: [BigInt]
+  stake_not_in: [BigInt]
+  stake_gt: BigInt
+  stake_lt: BigInt
+  stake_gte: BigInt
+  stake_lte: BigInt
+  payout: BigInt
+  payout_not: BigInt
+  payout_in: [BigInt]
+  payout_not_in: [BigInt]
+  payout_gt: BigInt
+  payout_lt: BigInt
+  payout_gte: BigInt
+  payout_lte: BigInt
+  cashoutValue: BigInt
+  cashoutValue_not: BigInt
+  cashoutValue_in: [BigInt]
+  cashoutValue_not_in: [BigInt]
+  cashoutValue_gt: BigInt
+  cashoutValue_lt: BigInt
+  cashoutValue_gte: BigInt
+  cashoutValue_lte: BigInt
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+}
+
+type forecasts {
+  agent: String!
+  marketId: BigInt!
+  probabilityYes1e18: BigInt!
+  status: String!
+  commitHash: String!
+}
+
+type forecastsPage {
+  items: [forecasts!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input forecastsFilter {
+  AND: [forecastsFilter]
+  OR: [forecastsFilter]
+  agent: String
+  agent_not: String
+  agent_in: [String]
+  agent_not_in: [String]
+  agent_contains: String
+  agent_not_contains: String
+  agent_starts_with: String
+  agent_ends_with: String
+  agent_not_starts_with: String
+  agent_not_ends_with: String
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  probabilityYes1e18: BigInt
+  probabilityYes1e18_not: BigInt
+  probabilityYes1e18_in: [BigInt]
+  probabilityYes1e18_not_in: [BigInt]
+  probabilityYes1e18_gt: BigInt
+  probabilityYes1e18_lt: BigInt
+  probabilityYes1e18_gte: BigInt
+  probabilityYes1e18_lte: BigInt
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+  commitHash: String
+  commitHash_not: String
+  commitHash_in: [String]
+  commitHash_not_in: [String]
+  commitHash_contains: String
+  commitHash_not_contains: String
+  commitHash_starts_with: String
+  commitHash_ends_with: String
+  commitHash_not_starts_with: String
+  commitHash_not_ends_with: String
+}
+
+type oracleCases {
+  marketId: BigInt!
+  state: String!
+  outcomeIndex: BigInt!
+  challenger: String!
+  bond: BigInt!
+}
+
+type oracleCasesPage {
+  items: [oracleCases!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input oracleCasesFilter {
+  AND: [oracleCasesFilter]
+  OR: [oracleCasesFilter]
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  state: String
+  state_not: String
+  state_in: [String]
+  state_not_in: [String]
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_ends_with: String
+  state_not_starts_with: String
+  state_not_ends_with: String
+  state_contains_nocase: String
+  state_not_contains_nocase: String
+  state_starts_with_nocase: String
+  state_ends_with_nocase: String
+  state_not_starts_with_nocase: String
+  state_not_ends_with_nocase: String
+  outcomeIndex: BigInt
+  outcomeIndex_not: BigInt
+  outcomeIndex_in: [BigInt]
+  outcomeIndex_not_in: [BigInt]
+  outcomeIndex_gt: BigInt
+  outcomeIndex_lt: BigInt
+  outcomeIndex_gte: BigInt
+  outcomeIndex_lte: BigInt
+  challenger: String
+  challenger_not: String
+  challenger_in: [String]
+  challenger_not_in: [String]
+  challenger_contains: String
+  challenger_not_contains: String
+  challenger_starts_with: String
+  challenger_ends_with: String
+  challenger_not_starts_with: String
+  challenger_not_ends_with: String
+  bond: BigInt
+  bond_not: BigInt
+  bond_in: [BigInt]
+  bond_not_in: [BigInt]
+  bond_gt: BigInt
+  bond_lt: BigInt
+  bond_gte: BigInt
+  bond_lte: BigInt
+}
+
+type protocolEvents {
+  id: String!
+  module: String!
+  kind: String!
+  actor: String!
+  marketId: BigInt!
+  value: BigInt!
+  blockNumber: BigInt!
+}
+
+type protocolEventsPage {
+  items: [protocolEvents!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input protocolEventsFilter {
+  AND: [protocolEventsFilter]
+  OR: [protocolEventsFilter]
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  id_starts_with: String
+  id_ends_with: String
+  id_not_starts_with: String
+  id_not_ends_with: String
+  id_contains_nocase: String
+  id_not_contains_nocase: String
+  id_starts_with_nocase: String
+  id_ends_with_nocase: String
+  id_not_starts_with_nocase: String
+  id_not_ends_with_nocase: String
+  module: String
+  module_not: String
+  module_in: [String]
+  module_not_in: [String]
+  module_contains: String
+  module_not_contains: String
+  module_starts_with: String
+  module_ends_with: String
+  module_not_starts_with: String
+  module_not_ends_with: String
+  module_contains_nocase: String
+  module_not_contains_nocase: String
+  module_starts_with_nocase: String
+  module_ends_with_nocase: String
+  module_not_starts_with_nocase: String
+  module_not_ends_with_nocase: String
+  kind: String
+  kind_not: String
+  kind_in: [String]
+  kind_not_in: [String]
+  kind_contains: String
+  kind_not_contains: String
+  kind_starts_with: String
+  kind_ends_with: String
+  kind_not_starts_with: String
+  kind_not_ends_with: String
+  kind_contains_nocase: String
+  kind_not_contains_nocase: String
+  kind_starts_with_nocase: String
+  kind_ends_with_nocase: String
+  kind_not_starts_with_nocase: String
+  kind_not_ends_with_nocase: String
+  actor: String
+  actor_not: String
+  actor_in: [String]
+  actor_not_in: [String]
+  actor_contains: String
+  actor_not_contains: String
+  actor_starts_with: String
+  actor_ends_with: String
+  actor_not_starts_with: String
+  actor_not_ends_with: String
+  marketId: BigInt
+  marketId_not: BigInt
+  marketId_in: [BigInt]
+  marketId_not_in: [BigInt]
+  marketId_gt: BigInt
+  marketId_lt: BigInt
+  marketId_gte: BigInt
+  marketId_lte: BigInt
+  value: BigInt
+  value_not: BigInt
+  value_in: [BigInt]
+  value_not_in: [BigInt]
+  value_gt: BigInt
+  value_lt: BigInt
+  value_gte: BigInt
+  value_lte: BigInt
+  blockNumber: BigInt
+  blockNumber_not: BigInt
+  blockNumber_in: [BigInt]
+  blockNumber_not_in: [BigInt]
+  blockNumber_gt: BigInt
+  blockNumber_lt: BigInt
+  blockNumber_gte: BigInt
+  blockNumber_lte: BigInt
+}
+
+type betSlips {
+  id: BigInt!
+  owner: String!
+  originContract: String!
+  originId: BigInt!
+  slipType: Int!
+  rarity: Int!
+  stakeWei: BigInt!
+  oddsSnapshot1e18: BigInt!
+  status: String!
+}
+
+type betSlipsPage {
+  items: [betSlips!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input betSlipsFilter {
+  AND: [betSlipsFilter]
+  OR: [betSlipsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  owner: String
+  owner_not: String
+  owner_in: [String]
+  owner_not_in: [String]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_ends_with: String
+  owner_not_starts_with: String
+  owner_not_ends_with: String
+  originContract: String
+  originContract_not: String
+  originContract_in: [String]
+  originContract_not_in: [String]
+  originContract_contains: String
+  originContract_not_contains: String
+  originContract_starts_with: String
+  originContract_ends_with: String
+  originContract_not_starts_with: String
+  originContract_not_ends_with: String
+  originId: BigInt
+  originId_not: BigInt
+  originId_in: [BigInt]
+  originId_not_in: [BigInt]
+  originId_gt: BigInt
+  originId_lt: BigInt
+  originId_gte: BigInt
+  originId_lte: BigInt
+  slipType: Int
+  slipType_not: Int
+  slipType_in: [Int]
+  slipType_not_in: [Int]
+  slipType_gt: Int
+  slipType_lt: Int
+  slipType_gte: Int
+  slipType_lte: Int
+  rarity: Int
+  rarity_not: Int
+  rarity_in: [Int]
+  rarity_not_in: [Int]
+  rarity_gt: Int
+  rarity_lt: Int
+  rarity_gte: Int
+  rarity_lte: Int
+  stakeWei: BigInt
+  stakeWei_not: BigInt
+  stakeWei_in: [BigInt]
+  stakeWei_not_in: [BigInt]
+  stakeWei_gt: BigInt
+  stakeWei_lt: BigInt
+  stakeWei_gte: BigInt
+  stakeWei_lte: BigInt
+  oddsSnapshot1e18: BigInt
+  oddsSnapshot1e18_not: BigInt
+  oddsSnapshot1e18_in: [BigInt]
+  oddsSnapshot1e18_not_in: [BigInt]
+  oddsSnapshot1e18_gt: BigInt
+  oddsSnapshot1e18_lt: BigInt
+  oddsSnapshot1e18_gte: BigInt
+  oddsSnapshot1e18_lte: BigInt
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+}
+
+type socialMarkets {
+  id: BigInt!
+  creator: String!
+  platform: Int!
+  metric: Int!
+  targetValue: BigInt!
+  resolveTime: Int!
+  finalValue: BigInt!
+  state: String!
+}
+
+type socialMarketsPage {
+  items: [socialMarkets!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input socialMarketsFilter {
+  AND: [socialMarketsFilter]
+  OR: [socialMarketsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  creator: String
+  creator_not: String
+  creator_in: [String]
+  creator_not_in: [String]
+  creator_contains: String
+  creator_not_contains: String
+  creator_starts_with: String
+  creator_ends_with: String
+  creator_not_starts_with: String
+  creator_not_ends_with: String
+  platform: Int
+  platform_not: Int
+  platform_in: [Int]
+  platform_not_in: [Int]
+  platform_gt: Int
+  platform_lt: Int
+  platform_gte: Int
+  platform_lte: Int
+  metric: Int
+  metric_not: Int
+  metric_in: [Int]
+  metric_not_in: [Int]
+  metric_gt: Int
+  metric_lt: Int
+  metric_gte: Int
+  metric_lte: Int
+  targetValue: BigInt
+  targetValue_not: BigInt
+  targetValue_in: [BigInt]
+  targetValue_not_in: [BigInt]
+  targetValue_gt: BigInt
+  targetValue_lt: BigInt
+  targetValue_gte: BigInt
+  targetValue_lte: BigInt
+  resolveTime: Int
+  resolveTime_not: Int
+  resolveTime_in: [Int]
+  resolveTime_not_in: [Int]
+  resolveTime_gt: Int
+  resolveTime_lt: Int
+  resolveTime_gte: Int
+  resolveTime_lte: Int
+  finalValue: BigInt
+  finalValue_not: BigInt
+  finalValue_in: [BigInt]
+  finalValue_not_in: [BigInt]
+  finalValue_gt: BigInt
+  finalValue_lt: BigInt
+  finalValue_gte: BigInt
+  finalValue_lte: BigInt
+  state: String
+  state_not: String
+  state_in: [String]
+  state_not_in: [String]
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_ends_with: String
+  state_not_starts_with: String
+  state_not_ends_with: String
+  state_contains_nocase: String
+  state_not_contains_nocase: String
+  state_starts_with_nocase: String
+  state_ends_with_nocase: String
+  state_not_starts_with_nocase: String
+  state_not_ends_with_nocase: String
+}
+
+type battleResults {
+  id: BigInt!
+  winner: String!
+  challengerScore: BigInt!
+  defenderScore: BigInt!
+}
+
+type battleResultsPage {
+  items: [battleResults!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input battleResultsFilter {
+  AND: [battleResultsFilter]
+  OR: [battleResultsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  winner: String
+  winner_not: String
+  winner_in: [String]
+  winner_not_in: [String]
+  winner_contains: String
+  winner_not_contains: String
+  winner_starts_with: String
+  winner_ends_with: String
+  winner_not_starts_with: String
+  winner_not_ends_with: String
+  challengerScore: BigInt
+  challengerScore_not: BigInt
+  challengerScore_in: [BigInt]
+  challengerScore_not_in: [BigInt]
+  challengerScore_gt: BigInt
+  challengerScore_lt: BigInt
+  challengerScore_gte: BigInt
+  challengerScore_lte: BigInt
+  defenderScore: BigInt
+  defenderScore_not: BigInt
+  defenderScore_in: [BigInt]
+  defenderScore_not_in: [BigInt]
+  defenderScore_gt: BigInt
+  defenderScore_lt: BigInt
+  defenderScore_gte: BigInt
+  defenderScore_lte: BigInt
+}
+
+type signals {
+  id: BigInt!
+  agent: String!
+  bundleHash: String!
+  creditCost: BigInt!
+  requiredTier: BigInt!
+}
+
+type signalsPage {
+  items: [signals!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input signalsFilter {
+  AND: [signalsFilter]
+  OR: [signalsFilter]
+  id: BigInt
+  id_not: BigInt
+  id_in: [BigInt]
+  id_not_in: [BigInt]
+  id_gt: BigInt
+  id_lt: BigInt
+  id_gte: BigInt
+  id_lte: BigInt
+  agent: String
+  agent_not: String
+  agent_in: [String]
+  agent_not_in: [String]
+  agent_contains: String
+  agent_not_contains: String
+  agent_starts_with: String
+  agent_ends_with: String
+  agent_not_starts_with: String
+  agent_not_ends_with: String
+  bundleHash: String
+  bundleHash_not: String
+  bundleHash_in: [String]
+  bundleHash_not_in: [String]
+  bundleHash_contains: String
+  bundleHash_not_contains: String
+  bundleHash_starts_with: String
+  bundleHash_ends_with: String
+  bundleHash_not_starts_with: String
+  bundleHash_not_ends_with: String
+  creditCost: BigInt
+  creditCost_not: BigInt
+  creditCost_in: [BigInt]
+  creditCost_not_in: [BigInt]
+  creditCost_gt: BigInt
+  creditCost_lt: BigInt
+  creditCost_gte: BigInt
+  creditCost_lte: BigInt
+  requiredTier: BigInt
+  requiredTier_not: BigInt
+  requiredTier_in: [BigInt]
+  requiredTier_not_in: [BigInt]
+  requiredTier_gt: BigInt
+  requiredTier_lt: BigInt
+  requiredTier_gte: BigInt
+  requiredTier_lte: BigInt
+}
+
+type fantasyEntries {
+  contestId: BigInt!
+  user: String!
+  picksHash: String!
+  points: BigInt!
+  status: String!
+}
+
+type fantasyEntriesPage {
+  items: [fantasyEntries!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input fantasyEntriesFilter {
+  AND: [fantasyEntriesFilter]
+  OR: [fantasyEntriesFilter]
+  contestId: BigInt
+  contestId_not: BigInt
+  contestId_in: [BigInt]
+  contestId_not_in: [BigInt]
+  contestId_gt: BigInt
+  contestId_lt: BigInt
+  contestId_gte: BigInt
+  contestId_lte: BigInt
+  user: String
+  user_not: String
+  user_in: [String]
+  user_not_in: [String]
+  user_contains: String
+  user_not_contains: String
+  user_starts_with: String
+  user_ends_with: String
+  user_not_starts_with: String
+  user_not_ends_with: String
+  picksHash: String
+  picksHash_not: String
+  picksHash_in: [String]
+  picksHash_not_in: [String]
+  picksHash_contains: String
+  picksHash_not_contains: String
+  picksHash_starts_with: String
+  picksHash_ends_with: String
+  picksHash_not_starts_with: String
+  picksHash_not_ends_with: String
+  points: BigInt
+  points_not: BigInt
+  points_in: [BigInt]
+  points_not_in: [BigInt]
+  points_gt: BigInt
+  points_lt: BigInt
+  points_gte: BigInt
+  points_lte: BigInt
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_ends_with: String
+  status_not_starts_with: String
+  status_not_ends_with: String
+  status_contains_nocase: String
+  status_not_contains_nocase: String
+  status_starts_with_nocase: String
+  status_ends_with_nocase: String
+  status_not_starts_with_nocase: String
+  status_not_ends_with_nocase: String
+}

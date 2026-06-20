@@ -1,0 +1,16 @@
+node_modules/
+dist/
+out/
+cache/
+broadcast/
+.ponder/
+packages/matcher/.cache/
+**/.cache/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.DS_Store
+.vercel/
+*.tsbuildinfo
